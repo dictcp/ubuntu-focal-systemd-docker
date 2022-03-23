@@ -50,7 +50,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y      \
     apt-key fingerprint 0EBFCD88 &&                                   \
                                                                       \
     add-apt-repository                                                \
-       "deb [arch=amd64] https://download.docker.com/linux/ubuntu     \
+       "deb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/ubuntu     \
        $(lsb_release -cs)                                             \
        stable" &&                                                     \
                                                                       \
@@ -70,7 +70,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y      \
        /usr/share/local/* &&                                          \
                                                                       \
     # Docker compose install
-    curl -SL https://github.com/docker/compose/releases/download/v2.2.3/docker-compose-linux-x86_64 -o /usr/libexec/docker/cli-plugins/docker-compose && \
+    curl -SL https://github.com/docker/compose/releases/download/v2.3.3/docker-compose-linux-$(uname -m) -o /usr/libexec/docker/cli-plugins/docker-compose && \
     chmod +x /usr/libexec/docker/cli-plugins/docker-compose
 
 # Sshd install
