@@ -1,4 +1,4 @@
-FROM ubuntu:focal
+FROM ubuntu:jimmy
 
 #
 # Systemd installation
@@ -55,7 +55,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y      \
        stable" &&                                                     \
                                                                       \
     apt-get update && apt-get install --no-install-recommends -y      \
-       docker-ce docker-ce-cli containerd.io &&                       \
+       docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin && \
                                                                       \
     # Housekeeping
     apt-get clean -y &&                                               \
@@ -67,11 +67,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y      \
        /var/tmp/*                                                     \
        /usr/share/doc/*                                               \
        /usr/share/man/*                                               \
-       /usr/share/local/* &&                                          \
-                                                                      \
-    # Docker compose install
-    curl -SL https://github.com/docker/compose/releases/download/v2.3.3/docker-compose-linux-$(uname -m) -o /usr/libexec/docker/cli-plugins/docker-compose && \
-    chmod +x /usr/libexec/docker/cli-plugins/docker-compose
+       /usr/share/local/*
 
 # Sshd install
 RUN apt-get update && apt-get install --no-install-recommends -y      \
